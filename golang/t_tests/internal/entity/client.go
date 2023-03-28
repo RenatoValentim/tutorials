@@ -26,6 +26,12 @@ func NewClient(name, email string) (*Client, error) {
 	}, nil
 }
 
-func (c *Client) AddPoints(points int) {
+func (c *Client) AddPoints(points int) error {
+	if points <= 0 {
+		return errors.New("points must be greater than zero")
+	}
+
 	c.Points = points
+
+	return nil
 }

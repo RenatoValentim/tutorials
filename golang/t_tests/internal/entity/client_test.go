@@ -43,3 +43,16 @@ func TestAddPoints(t *testing.T) {
 	assert.Equal(t, "fake_email", client.Email)
 	assert.Equal(t, 10, client.Points)
 }
+
+func TestAddPointsMinorOrEqualsToZero(t *testing.T) {
+	client, _ := NewClient("fake_name", "fake_email")
+
+	err := client.AddPoints(0)
+
+	assert.NotNil(t, err)
+	assert.Error(t, err, "points must be greater than zero")
+	assert.NotEqual(t, "", client.ID)
+	assert.Equal(t, "fake_name", client.Name)
+	assert.Equal(t, "fake_email", client.Email)
+	assert.Equal(t, 0, client.Points)
+}
