@@ -23,3 +23,11 @@ func TestNewClientWithInvalidName(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Error(t, err, "client name is required")
 }
+
+func TestNewClientWithInvalidEmail(t *testing.T) {
+	client, err := NewClient("fake_name", "")
+
+	assert.Nil(t, client)
+	assert.NotNil(t, err)
+	assert.Error(t, err, "client email is required")
+}

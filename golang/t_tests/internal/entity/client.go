@@ -14,7 +14,7 @@ type Client struct {
 }
 
 func NewClient(name, email string) (*Client, error) {
-	if name == "" {
+	if name == "" || email == "" {
 		return nil, errors.New("client name is required")
 	}
 
