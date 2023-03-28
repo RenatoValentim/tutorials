@@ -25,3 +25,7 @@ func NewClient(name, email string) (*Client, error) {
 		Points: 0,
 	}, nil
 }
+
+func (c *Client) AddPoints(points int) {
+	c.Points = points
+}

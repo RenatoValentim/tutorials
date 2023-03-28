@@ -31,3 +31,15 @@ func TestNewClientWithInvalidEmail(t *testing.T) {
 	assert.NotNil(t, err)
 	assert.Error(t, err, "client email is required")
 }
+
+func TestAddPoints(t *testing.T) {
+	client, err := NewClient("fake_name", "fake_email")
+
+	client.AddPoints(10)
+
+	assert.Nil(t, err)
+	assert.NotEqual(t, "", client.ID)
+	assert.Equal(t, "fake_name", client.Name)
+	assert.Equal(t, "fake_email", client.Email)
+	assert.Equal(t, 10, client.Points)
+}
