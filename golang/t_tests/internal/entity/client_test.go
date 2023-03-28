@@ -56,3 +56,24 @@ func TestAddPointsMinorOrEqualsToZero(t *testing.T) {
 	assert.Equal(t, "fake_email", client.Email)
 	assert.Equal(t, 0, client.Points)
 }
+
+func FuzzAddPointsBatch(f *testing.F) {
+	points := []int{2, 4, 6, 8, 10}
+	for _, point := range points {
+		f.Add(point)
+	}
+
+	f.Fuzz(func(t *testing.T, points int) {
+		client, _ := NewClient("fake_name", "fake_email")
+
+		err := client.AddPoints(points)
+
+		if err != nil {
+			return
+		}
+
+		if client.Points != points {
+			t.Errorf("Points expected: %d, got: %d", points, client.Points)
+		}
+	})
+}
